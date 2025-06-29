@@ -29,7 +29,7 @@ dtree --depth 3 .
 
 ### 🚀 Quick Install (Recommended)
 ```bash
-curl -sSL https://raw.githubusercontent.com/C0ldSmi1e/dtree/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/C0ldSmi1e/dtree/main/install.sh -o dtree_install.sh && bash dtree_install.sh && rm dtree_install.sh
 ```
 
 ### 📥 Download Pre-built Binary
