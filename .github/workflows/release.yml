@@ -1,0 +1,87 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Run tests
+        run: go test ./tests/... -v
+
+      - name: Build binaries
+        run: |
+          # Create release directory
+          mkdir -p release
+          
+          # Build for different platforms
+          GOOS=darwin GOARCH=amd64 go build -o release/dtree-darwin-amd64 .
+          GOOS=darwin GOARCH=arm64 go build -o release/dtree-darwin-arm64 .
+          GOOS=linux GOARCH=amd64 go build -o release/dtree-linux-amd64 .
+          GOOS=linux GOARCH=arm64 go build -o release/dtree-linux-arm64 .
+          GOOS=windows GOARCH=amd64 go build -o release/dtree-windows-amd64.exe .
+          
+          # Make binaries executable
+          chmod +x release/dtree-*
+
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          echo "## What's Changed" > release_notes.md
+          echo "" >> release_notes.md
+          echo "### Features" >> release_notes.md
+          echo "- Interactive directory tree viewer" >> release_notes.md
+          echo "- Smooth scrolling viewport for large directories" >> release_notes.md
+          echo "- Cross-platform file opening" >> release_notes.md
+          echo "- Vim-style navigation (j/k, gg/G)" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "### Installation" >> release_notes.md
+          echo "Download the appropriate binary for your platform:" >> release_notes.md
+          echo "- **macOS (Intel)**: dtree-darwin-amd64" >> release_notes.md
+          echo "- **macOS (Apple Silicon)**: dtree-darwin-arm64" >> release_notes.md
+          echo "- **Linux (x64)**: dtree-linux-amd64" >> release_notes.md
+          echo "- **Linux (ARM64)**: dtree-linux-arm64" >> release_notes.md
+          echo "- **Windows (x64)**: dtree-windows-amd64.exe" >> release_notes.md
+          echo "" >> release_notes.md
+          echo "Make the binary executable and move to your PATH:" >> release_notes.md
+          echo "\`\`\`bash" >> release_notes.md
+          echo "chmod +x dtree-*" >> release_notes.md
+          echo "sudo mv dtree-* /usr/local/bin/dtree" >> release_notes.md
+          echo "\`\`\`" >> release_notes.md
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            release/dtree-darwin-amd64
+            release/dtree-darwin-arm64
+            release/dtree-linux-amd64
+            release/dtree-linux-arm64
+            release/dtree-windows-amd64.exe
+          body_path: release_notes.md
+          draft: false
+          prerelease: ${{ contains(github.ref_name, 'rc') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'alpha') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update install script
+        if: ${{ !contains(github.ref_name, 'rc') && !contains(github.ref_name, 'beta') && !contains(github.ref_name, 'alpha') }}
+        run: |
+          # Update version in install.sh if it exists
+          if [ -f install.sh ]; then
+            sed -i "s/VERSION=.*/VERSION=\"${GITHUB_REF_NAME#v}\"/" install.sh || true
+          fi
