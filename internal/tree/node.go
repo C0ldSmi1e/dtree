@@ -25,7 +25,7 @@ func Build(rootPath string, initialDepth int) *Node {
 		IsExpanded: true,
 		Depth:      0,
 	}
-	
+
 	loadChildrenRecursive(root, initialDepth)
 	return root
 }
@@ -36,7 +36,7 @@ func (n *Node) LoadChildren() {
 	if err != nil {
 		return
 	}
-	
+
 	for _, entry := range entries {
 		childPath := filepath.Join(n.Path, entry.Name())
 		child := &Node{
@@ -55,13 +55,13 @@ func (n *Node) IsLastChild() bool {
 	if n.Parent == nil {
 		return true
 	}
-	
+
 	visibleSiblings := n.Parent.Children
-	
+
 	if len(visibleSiblings) == 0 {
 		return true
 	}
-	
+
 	return visibleSiblings[len(visibleSiblings)-1] == n
 }
 
@@ -70,12 +70,12 @@ func loadChildrenRecursive(node *Node, initialDepth int) {
 	if node.Depth >= initialDepth {
 		return
 	}
-	
+
 	entries, err := os.ReadDir(node.Path)
 	if err != nil {
 		return
 	}
-	
+
 	for _, entry := range entries {
 		childPath := filepath.Join(node.Path, entry.Name())
 		child := &Node{
@@ -86,7 +86,7 @@ func loadChildrenRecursive(node *Node, initialDepth int) {
 			Depth:  node.Depth + 1,
 		}
 		node.Children = append(node.Children, child)
-		
+
 		if child.IsDir && child.Depth < initialDepth {
 			child.IsExpanded = true
 			loadChildrenRecursive(child, initialDepth)

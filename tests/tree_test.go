@@ -21,20 +21,20 @@ func setupTestFixture(t *testing.T) string {
 	//     └── empty_dir/
 
 	files := map[string]string{
-		"file1.txt":           "sample content",
-		"file2.go":            "package main\n\nfunc main() {}",
-		".hidden":             "hidden file",
-		"subdir/nested.txt":   "nested content",
+		"file1.txt":         "sample content",
+		"file2.go":          "package main\n\nfunc main() {}",
+		".hidden":           "hidden file",
+		"subdir/nested.txt": "nested content",
 	}
 
 	for relPath, content := range files {
 		fullPath := filepath.Join(tmpDir, relPath)
 		dir := filepath.Dir(fullPath)
-		
+
 		if err := os.MkdirAll(dir, 0755); err != nil {
 			t.Fatal(err)
 		}
-		
+
 		if err := os.WriteFile(fullPath, []byte(content), 0644); err != nil {
 			t.Fatal(err)
 		}

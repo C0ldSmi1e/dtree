@@ -53,7 +53,7 @@ func New(rootTree *tree.Node, initialDepth int, rootPath string) *Model {
 		headerStyle: lipgloss.NewStyle(),
 		errorStyle:  lipgloss.NewStyle().Foreground(lipgloss.Color("1")),
 	}
-	
+
 	m.updateFlattenedNodes()
 	return m
 }
@@ -93,9 +93,9 @@ func (m *Model) updateViewportHeight() {
 	if m.status != "" {
 		statusLines = 1
 	}
-	
+
 	availableHeight := m.terminalHeight - headerLines - controlLines - statusLines
-	
+
 	// Only constrain viewport if we have a reasonable terminal height
 	// This ensures tests and very tall terminals show all content
 	if m.terminalHeight > 10 && availableHeight > 0 {
@@ -104,7 +104,7 @@ func (m *Model) updateViewportHeight() {
 		// For tests or unusual cases, use a large viewport
 		m.viewportHeight = max(availableHeight, len(m.flattenedNodes))
 	}
-	
+
 	if m.viewportHeight < 1 {
 		m.viewportHeight = 1
 	}
@@ -119,7 +119,7 @@ func (m *Model) adjustViewportToCursor() {
 		// Cursor is below viewport, scroll down
 		m.viewportOffset = m.cursor - m.viewportHeight + 1
 	}
-	
+
 	// Ensure viewport doesn't go beyond content
 	if m.viewportOffset < 0 {
 		m.viewportOffset = 0

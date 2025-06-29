@@ -17,25 +17,25 @@ func setupComplexTestProject(t *testing.T) string {
 
 	// Create a realistic project structure
 	structure := map[string]string{
-		"README.md":                    "# Test Project\n\nThis is a test project.",
-		"go.mod":                       "module testproject\n\ngo 1.21",
-		"go.sum":                       "// dependencies",
-		"main.go":                      "package main\n\nfunc main() {\n\tprintln(\"Hello\")\n}",
-		".gitignore":                   "*.log\n/dist/\n.env",
-		"cmd/server/main.go":           "package main\n// server",
-		"internal/api/handler.go":      "package api\n// handlers",
-		"internal/api/middleware.go":   "package api\n// middleware", 
-		"internal/db/connection.go":    "package db\n// database",
-		"pkg/utils/helper.go":          "package utils\n// utilities",
-		"docs/api.md":                  "# API Documentation",
-		"docs/deployment.md":           "# Deployment Guide",
-		"tests/unit_test.go":           "package tests\n// unit tests",
-		"tests/integration_test.go":    "package tests\n// integration tests",
-		"config/config.yaml":           "database:\n  host: localhost",
-		"scripts/build.sh":             "#!/bin/bash\ngo build",
-		"assets/styles.css":            "body { font-family: sans-serif; }",
-		"assets/logo.png":              "fake png content",
-		"vendor/dependency/lib.go":     "package dependency",
+		"README.md":                  "# Test Project\n\nThis is a test project.",
+		"go.mod":                     "module testproject\n\ngo 1.21",
+		"go.sum":                     "// dependencies",
+		"main.go":                    "package main\n\nfunc main() {\n\tprintln(\"Hello\")\n}",
+		".gitignore":                 "*.log\n/dist/\n.env",
+		"cmd/server/main.go":         "package main\n// server",
+		"internal/api/handler.go":    "package api\n// handlers",
+		"internal/api/middleware.go": "package api\n// middleware",
+		"internal/db/connection.go":  "package db\n// database",
+		"pkg/utils/helper.go":        "package utils\n// utilities",
+		"docs/api.md":                "# API Documentation",
+		"docs/deployment.md":         "# Deployment Guide",
+		"tests/unit_test.go":         "package tests\n// unit tests",
+		"tests/integration_test.go":  "package tests\n// integration tests",
+		"config/config.yaml":         "database:\n  host: localhost",
+		"scripts/build.sh":           "#!/bin/bash\ngo build",
+		"assets/styles.css":          "body { font-family: sans-serif; }",
+		"assets/logo.png":            "fake png content",
+		"vendor/dependency/lib.go":   "package dependency",
 	}
 
 	for relPath, content := range structure {
@@ -140,10 +140,10 @@ func TestNavigationAndExpansion(t *testing.T) {
 
 	// Test navigation sequence
 	navigationSteps := []tea.KeyMsg{
-		{Type: tea.KeyDown},   // Move down
-		{Type: tea.KeyDown},   // Move down again
-		{Type: tea.KeyEnter},  // Expand/collapse or open
-		{Type: tea.KeyUp},     // Move up
+		{Type: tea.KeyDown},                      // Move down
+		{Type: tea.KeyDown},                      // Move down again
+		{Type: tea.KeyEnter},                     // Expand/collapse or open
+		{Type: tea.KeyUp},                        // Move up
 		{Type: tea.KeyRunes, Runes: []rune{'j'}}, // Vim-style down
 		{Type: tea.KeyRunes, Runes: []rune{'k'}}, // Vim-style up
 	}
@@ -151,7 +151,7 @@ func TestNavigationAndExpansion(t *testing.T) {
 	currentModel := model
 	for i, step := range navigationSteps {
 		updatedModel, cmd := currentModel.Update(step)
-		
+
 		// Should not panic or error
 		if updatedModel == nil {
 			t.Errorf("Step %d: Model should not be nil after update", i)
@@ -179,7 +179,7 @@ func TestErrorHandling(t *testing.T) {
 	// Test with invalid/inaccessible directory
 	invalidPath := "/invalid/path/that/does/not/exist"
 	root := tree.Build(invalidPath, 1)
-	
+
 	if root == nil {
 		t.Fatal("Build should handle invalid paths gracefully")
 	}
@@ -280,7 +280,7 @@ func TestQuietModes(t *testing.T) {
 	for _, quitKey := range quitKeys {
 		t.Run(t.Name(), func(t *testing.T) {
 			_, cmd := model.Update(quitKey)
-			
+
 			if cmd == nil {
 				t.Error("Quit keys should return quit command")
 			}
@@ -298,7 +298,7 @@ func TestTreeCharacters(t *testing.T) {
 	// Should contain tree drawing characters
 	treeChars := []string{
 		"├──", // Branch connector
-		"└──", // Last item connector  
+		"└──", // Last item connector
 		"│",   // Vertical line
 		"▶",   // Collapsed indicator
 		"▼",   // Expanded indicator
