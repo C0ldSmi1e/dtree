@@ -57,9 +57,6 @@ detect_platform() {
                 *) log_error "Unsupported architecture: $arch"; exit 1 ;;
             esac
             ;;
-        mingw*|msys*|cygwin*)
-            echo "windows-amd64.exe"
-            ;;
         *)
             log_error "Unsupported OS: $os"
             exit 1

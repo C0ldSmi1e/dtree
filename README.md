@@ -9,7 +9,7 @@ A fast, interactive directory tree viewer for the terminal with smooth scrolling
 - **Smart Lazy Loading** - Performance optimized for deep directory structures
 - **File Integration** - Press Enter to open files with default applications
 - **Configurable Depth** - Control initial expansion with `--depth` flag
-- **Cross-Platform** - Works on macOS, Linux, and Windows
+- **Cross-Platform** - Works on macOS and Linux
 - **Clean Interface** - Minimal design focused on productivity
 
 ## 🚀 Quick Start
@@ -37,7 +37,6 @@ curl -sSL https://raw.githubusercontent.com/C0ldSmi1e/dtree/main/install.sh -o d
 - [macOS (Apple Silicon)](https://github.com/C0ldSmi1e/dtree/releases/latest/download/dtree-darwin-arm64) 
 - [Linux (x64)](https://github.com/C0ldSmi1e/dtree/releases/latest/download/dtree-linux-amd64)
 - [Linux (ARM64)](https://github.com/C0ldSmi1e/dtree/releases/latest/download/dtree-linux-arm64)
-- [Windows (x64)](https://github.com/C0ldSmi1e/dtree/releases/latest/download/dtree-windows-amd64.exe)
 
 ### 🛠️ For Go Developers
 ```bash

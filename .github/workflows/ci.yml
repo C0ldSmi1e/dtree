@@ -48,12 +48,8 @@ jobs:
     needs: test
     strategy:
       matrix:
-        goos: [linux, darwin, windows]
+        goos: [linux, darwin]
         goarch: [amd64, arm64]
-        exclude:
-          # Windows ARM64 builds often have issues
-          - goos: windows
-            goarch: arm64
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -67,12 +63,7 @@ jobs:
         env:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
-        run: |
-          if [ "$GOOS" = "windows" ]; then
-            go build -o dtree-${{ matrix.goos }}-${{ matrix.goarch }}.exe .
-          else
-            go build -o dtree-${{ matrix.goos }}-${{ matrix.goarch }} .
-          fi
+        run: go build -o dtree-${{ matrix.goos }}-${{ matrix.goarch }} .
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

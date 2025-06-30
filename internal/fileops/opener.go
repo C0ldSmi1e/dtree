@@ -14,8 +14,6 @@ func OpenFile(filePath string) error {
 	switch runtime.GOOS {
 	case "darwin":
 		cmd = exec.Command("open", filePath)
-	case "windows":
-		cmd = exec.Command("rundll32", "url.dll,FileProtocolHandler", filePath)
 	case "linux":
 		cmd = exec.Command("xdg-open", filePath)
 	default:
