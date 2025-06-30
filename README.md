@@ -2,6 +2,11 @@
 
 The `tree` command, but interactive - a terminal filesystem navigator.
 
+<video width="100%" controls>
+  <source src="assets/demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## ✨ Features
 
 - **Interactive Navigation** - Navigate with arrow keys or vim-style controls (j/k/gg/G)
