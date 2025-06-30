@@ -2,6 +2,10 @@
 
 The `tree` command, but interactive - a terminal filesystem navigator.
 
+https://github.com/user-attachments/assets/5e5d5317-0634-4a92-9d56-3d82056ddaea
+
+
+
 ## ✨ Features
 
 - **Interactive Navigation** - Navigate with arrow keys or vim-style controls (j/k/gg/G)
