@@ -1,16 +1,14 @@
 # DTree 🌳
 
-A fast, interactive directory tree viewer for the terminal with smooth scrolling viewport. Navigate your filesystem with ease and open files instantly.
+The `tree` command, but interactive - a terminal filesystem navigator.
 
 ## ✨ Features
 
-- **Smooth Scrolling Viewport** - Handles large directories with responsive scrolling
-- **Interactive Navigation** - Use arrow keys or vim-style (j/k) to explore
-- **Smart Lazy Loading** - Performance optimized for deep directory structures
-- **File Integration** - Press Enter to open files with default applications
-- **Configurable Depth** - Control initial expansion with `--depth` flag
-- **Cross-Platform** - Works on macOS and Linux
-- **Clean Interface** - Minimal design focused on productivity
+- **Interactive Navigation** - Navigate with arrow keys or vim-style controls (j/k/gg/G)
+- **Instant File Opening** - Press Enter to open with default applications
+- **Configurable Depth** - See as much or as little as you want
+- **Cross-Platform** - Works on macOS, Linux and WSL
+- **Zero Dependencies** - Single binary, no installation complexity
 
 ## 🚀 Quick Start
 
@@ -23,6 +21,9 @@ dtree /path/to/project
 
 # Expand 3 levels deep
 dtree --depth 3 .
+
+# Usage
+dtree -h
 ```
 
 ## 📦 Installation
@@ -77,29 +78,6 @@ Examples:
   dtree -d 2 .        # Expand 2 levels deep
 ```
 
-## 📋 Examples
-
-### Basic Navigation
-```
-myproject/
-▶ src/
-▶ docs/
-  README.md
-  go.mod
-```
-
-### Expanded View
-```
-myproject/
-▼ src/
-  ├── main.go
-  ├── handlers/
-  └── utils/
-▶ docs/
-  README.md
-  go.mod
-```
-
 ## 🏗️ Development
 
 ### Requirements
@@ -134,13 +112,3 @@ dtree/
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [Bubble Tea](https://github.com/charmbracelet/bubbletea) 🧋
-- Styled with [Lip Gloss](https://github.com/charmbracelet/lipgloss) 💄
-- Inspired by the classic `tree` command 🌲
-
----
-
-**Made with ❤️ for developers who live in the terminal**

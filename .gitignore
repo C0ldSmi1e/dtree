@@ -8,6 +8,8 @@ dtree
 dtree.exe
 release/
 
+test-project
+
 dtree-prd.md
 
 # Test binary, built with `go test -c`
